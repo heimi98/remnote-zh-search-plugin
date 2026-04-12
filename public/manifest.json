@@ -1,0 +1,22 @@
+{
+  "manifestVersion": 1,
+  "id": "remnote_zh_search_plugin",
+  "name": "RemNote 中文搜索增强",
+  "author": "heimi98",
+  "repoUrl": "https://github.com/heimi98/remnote-zh-search-plugin",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "theme": [],
+  "enableOnMobile": true,
+  "description": "为 RemNote 提供更可靠的中文关键词搜索弹窗，支持桌面和移动端入口。",
+  "requestNative": false,
+  "requiredScopes": [
+    {
+      "type": "All",
+      "level": "Read"
+    }
+  ]
+}
