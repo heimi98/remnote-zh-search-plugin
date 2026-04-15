@@ -1,4 +1,5 @@
 .rn-zh-search-theme {
+  --rn-zh-color-scheme: dark;
   --rn-zh-font-sans: 'Avenir Next', 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', sans-serif;
   --rn-zh-bg: #24232b;
@@ -17,9 +18,94 @@
   --rn-zh-warning: #f2b35c;
   --rn-zh-warning-soft: rgba(242, 179, 92, 0.14);
   --rn-zh-highlight: #f7d94a;
+  --rn-zh-highlight-text: #29210d;
   --rn-zh-shadow: 0 20px 48px rgba(10, 10, 16, 0.38);
+  --rn-zh-shell-glow-left: rgba(75, 163, 255, 0.08);
+  --rn-zh-shell-glow-right: rgba(255, 255, 255, 0.04);
+  --rn-zh-header-gloss: rgba(255, 255, 255, 0.02);
+  --rn-zh-header-gloss-soft: rgba(255, 255, 255, 0);
+  --rn-zh-commandbar-bg: rgba(255, 255, 255, 0.04);
+  --rn-zh-commandbar-sheen: rgba(255, 255, 255, 0.04);
+  --rn-zh-commandbar-icon: #a9a2bb;
+  --rn-zh-commandbar-focus-border: rgba(75, 163, 255, 0.42);
+  --rn-zh-commandbar-focus-ring: rgba(75, 163, 255, 0.12);
+  --rn-zh-button-bg: rgba(255, 255, 255, 0.04);
+  --rn-zh-button-hover-border: rgba(75, 163, 255, 0.36);
+  --rn-zh-button-topbar-hover: rgba(255, 255, 255, 0.08);
+  --rn-zh-status-bg: rgba(255, 255, 255, 0.03);
+  --rn-zh-pill-bg: rgba(255, 255, 255, 0.03);
+  --rn-zh-warning-border: rgba(242, 179, 92, 0.32);
+  --rn-zh-warning-text: #ffd89b;
+  --rn-zh-scrollbar-thumb: rgba(255, 255, 255, 0.16);
+  --rn-zh-scrollbar-thumb-strong: rgba(255, 255, 255, 0.18);
+  --rn-zh-result-shadow: rgba(255, 255, 255, 0.02);
+  --rn-zh-result-hover-border: rgba(255, 255, 255, 0.05);
+  --rn-zh-result-active-border: rgba(75, 163, 255, 0.45);
+  --rn-zh-result-active-top: rgba(75, 163, 255, 0.12);
+  --rn-zh-result-active-bottom: rgba(75, 163, 255, 0.02);
+  --rn-zh-result-active-outline: rgba(75, 163, 255, 0.1);
+  --rn-zh-best-match: #f2c46d;
+  --rn-zh-marker-border: rgba(255, 255, 255, 0.28);
+  --rn-zh-marker-active-border: rgba(255, 255, 255, 0.4);
+  --rn-zh-marker-shadow: rgba(255, 255, 255, 0.04);
+  --rn-zh-preview-gloss: rgba(255, 255, 255, 0.02);
+  --rn-zh-shell-radius: 14px;
   color: var(--rn-zh-text);
+  color-scheme: var(--rn-zh-color-scheme);
   font-family: var(--rn-zh-font-sans);
+}
+
+.light .rn-zh-search-theme,
+body.light .rn-zh-search-theme,
+html.light .rn-zh-search-theme {
+  --rn-zh-color-scheme: light;
+  --rn-zh-bg: #f6f1e8;
+  --rn-zh-bg-soft: #eee7db;
+  --rn-zh-surface: #fffdfa;
+  --rn-zh-surface-hover: #f7f0e5;
+  --rn-zh-surface-strong: #eef5ff;
+  --rn-zh-panel: #f2ece2;
+  --rn-zh-panel-border: rgba(73, 59, 43, 0.12);
+  --rn-zh-divider: rgba(73, 59, 43, 0.11);
+  --rn-zh-text: #241d15;
+  --rn-zh-text-soft: #62584c;
+  --rn-zh-text-dim: #8a7d6f;
+  --rn-zh-blue: #2f78d1;
+  --rn-zh-blue-soft: rgba(47, 120, 209, 0.14);
+  --rn-zh-warning: #b97c1d;
+  --rn-zh-warning-soft: rgba(185, 124, 29, 0.12);
+  --rn-zh-highlight: #f4de76;
+  --rn-zh-highlight-text: #3a3010;
+  --rn-zh-shadow: 0 20px 48px rgba(79, 61, 42, 0.14);
+  --rn-zh-shell-glow-left: rgba(47, 120, 209, 0.12);
+  --rn-zh-shell-glow-right: rgba(255, 255, 255, 0.72);
+  --rn-zh-header-gloss: rgba(255, 255, 255, 0.7);
+  --rn-zh-header-gloss-soft: rgba(255, 255, 255, 0);
+  --rn-zh-commandbar-bg: rgba(255, 255, 255, 0.88);
+  --rn-zh-commandbar-sheen: rgba(255, 255, 255, 0.78);
+  --rn-zh-commandbar-icon: #817565;
+  --rn-zh-commandbar-focus-border: rgba(47, 120, 209, 0.36);
+  --rn-zh-commandbar-focus-ring: rgba(47, 120, 209, 0.16);
+  --rn-zh-button-bg: rgba(255, 255, 255, 0.78);
+  --rn-zh-button-hover-border: rgba(47, 120, 209, 0.28);
+  --rn-zh-button-topbar-hover: rgba(47, 120, 209, 0.12);
+  --rn-zh-status-bg: rgba(255, 255, 255, 0.7);
+  --rn-zh-pill-bg: rgba(255, 255, 255, 0.66);
+  --rn-zh-warning-border: rgba(185, 124, 29, 0.22);
+  --rn-zh-warning-text: #9b6919;
+  --rn-zh-scrollbar-thumb: rgba(98, 88, 76, 0.18);
+  --rn-zh-scrollbar-thumb-strong: rgba(98, 88, 76, 0.22);
+  --rn-zh-result-shadow: rgba(255, 255, 255, 0.78);
+  --rn-zh-result-hover-border: rgba(73, 59, 43, 0.08);
+  --rn-zh-result-active-border: rgba(47, 120, 209, 0.42);
+  --rn-zh-result-active-top: rgba(47, 120, 209, 0.1);
+  --rn-zh-result-active-bottom: rgba(47, 120, 209, 0.03);
+  --rn-zh-result-active-outline: rgba(47, 120, 209, 0.12);
+  --rn-zh-best-match: #b5771e;
+  --rn-zh-marker-border: rgba(98, 88, 76, 0.24);
+  --rn-zh-marker-active-border: rgba(47, 120, 209, 0.3);
+  --rn-zh-marker-shadow: rgba(47, 120, 209, 0.08);
+  --rn-zh-preview-gloss: rgba(255, 255, 255, 0.38);
 }
 
 .rn-zh-search-shell {
@@ -32,10 +118,10 @@
   min-height: 720px;
   overflow: hidden;
   border: 1px solid var(--rn-zh-panel-border);
-  border-radius: 24px;
+  border-radius: var(--rn-zh-shell-radius);
   background:
-    radial-gradient(circle at top left, rgba(75, 163, 255, 0.08), transparent 28%),
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.04), transparent 24%),
+    radial-gradient(circle at top left, var(--rn-zh-shell-glow-left), transparent 28%),
+    radial-gradient(circle at top right, var(--rn-zh-shell-glow-right), transparent 24%),
     var(--rn-zh-bg);
   box-shadow: var(--rn-zh-shadow);
 }
@@ -43,7 +129,11 @@
 .rn-zh-search-header {
   padding: 16px 22px 14px;
   border-bottom: 1px solid var(--rn-zh-divider);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    180deg,
+    var(--rn-zh-header-gloss),
+    var(--rn-zh-header-gloss-soft)
+  );
 }
 
 .rn-zh-search-toolbar,
@@ -64,20 +154,20 @@
   padding: 0 14px;
   border: 1px solid var(--rn-zh-divider);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: var(--rn-zh-commandbar-bg);
+  box-shadow: inset 0 1px 0 var(--rn-zh-commandbar-sheen);
 }
 
 .rn-zh-search-commandbar:focus-within {
-  border-color: rgba(75, 163, 255, 0.42);
+  border-color: var(--rn-zh-commandbar-focus-border);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 0 0 3px rgba(75, 163, 255, 0.12);
+    inset 0 1px 0 var(--rn-zh-commandbar-sheen),
+    0 0 0 3px var(--rn-zh-commandbar-focus-ring);
 }
 
 .rn-zh-search-commandbar-icon {
   display: inline-flex;
-  color: #a9a2bb;
+  color: var(--rn-zh-commandbar-icon);
 }
 
 .rn-zh-search-search-icon {
@@ -125,7 +215,7 @@
   padding: 10px 14px;
   border: 1px solid var(--rn-zh-divider);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--rn-zh-button-bg);
   color: var(--rn-zh-text-soft);
   font-size: 13px;
   font-weight: 700;
@@ -147,7 +237,7 @@
 
 .rn-zh-search-toolbar-button:hover:not(:disabled),
 .rn-zh-search-open-selected:hover:not(:disabled) {
-  border-color: rgba(75, 163, 255, 0.36);
+  border-color: var(--rn-zh-button-hover-border);
   color: var(--rn-zh-text);
 }
 
@@ -206,7 +296,7 @@
   padding: 14px 16px;
   border: 1px solid var(--rn-zh-divider);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--rn-zh-status-bg);
 }
 
 .rn-zh-search-status-label {
@@ -241,16 +331,16 @@
   padding: 0 12px;
   border: 1px solid var(--rn-zh-divider);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--rn-zh-pill-bg);
   color: var(--rn-zh-text-soft);
   font-size: 12px;
   font-weight: 700;
 }
 
 .rn-zh-search-meta-pill-warning {
-  border-color: rgba(242, 179, 92, 0.32);
+  border-color: var(--rn-zh-warning-border);
   background: var(--rn-zh-warning-soft);
-  color: #ffd89b;
+  color: var(--rn-zh-warning-text);
 }
 
 
@@ -298,7 +388,7 @@
 .rn-zh-search-results-scroll,
 .rn-zh-search-preview-panel {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-color: var(--rn-zh-scrollbar-thumb-strong) transparent;
 }
 
 .rn-zh-search-results-scroll::-webkit-scrollbar,
@@ -311,7 +401,7 @@
 .rn-zh-search-preview-panel::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
+  background: var(--rn-zh-scrollbar-thumb);
   background-clip: padding-box;
 }
 
@@ -329,25 +419,25 @@
   background: var(--rn-zh-surface);
   color: var(--rn-zh-text);
   text-align: left;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0 1px 0 var(--rn-zh-result-shadow);
 }
 
 .rn-zh-search-result-card:hover:not(:disabled) {
   background: var(--rn-zh-surface-hover);
-  border-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--rn-zh-result-hover-border);
 }
 
 .rn-zh-search-result-card.is-active {
-  border-color: rgba(75, 163, 255, 0.45);
+  border-color: var(--rn-zh-result-active-border);
   background:
-    linear-gradient(180deg, rgba(75, 163, 255, 0.12), rgba(75, 163, 255, 0.02)),
+    linear-gradient(180deg, var(--rn-zh-result-active-top), var(--rn-zh-result-active-bottom)),
     var(--rn-zh-surface-strong);
-  box-shadow: inset 0 0 0 1px rgba(75, 163, 255, 0.1);
+  box-shadow: inset 0 0 0 1px var(--rn-zh-result-active-outline);
 }
 
 .rn-zh-search-best-match {
   margin-bottom: 12px;
-  color: #f2c46d;
+  color: var(--rn-zh-best-match);
 }
 
 .rn-zh-search-result-grid {
@@ -366,14 +456,14 @@
 .rn-zh-search-result-marker-core {
   width: 14px;
   height: 14px;
-  border: 3px solid rgba(255, 255, 255, 0.28);
+  border: 3px solid var(--rn-zh-marker-border);
   border-radius: 999px;
   background: #ff6a5b;
-  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 0 5px var(--rn-zh-marker-shadow);
 }
 
 .rn-zh-search-result-marker.is-active .rn-zh-search-result-marker-core {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--rn-zh-marker-active-border);
   background: var(--rn-zh-blue);
   box-shadow: 0 0 0 5px var(--rn-zh-blue-soft);
 }
@@ -421,7 +511,7 @@
   padding: 0 2px;
   border-radius: 6px;
   background: var(--rn-zh-highlight);
-  color: #29210d;
+  color: var(--rn-zh-highlight-text);
 }
 
 .rn-zh-search-preview-panel {
@@ -433,7 +523,7 @@
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent), var(--rn-zh-panel);
+  background: linear-gradient(180deg, var(--rn-zh-preview-gloss), transparent), var(--rn-zh-panel);
 }
 
 .rn-zh-search-preview-surface {
@@ -500,7 +590,7 @@
 }
 
 .rn-zh-search-topbar-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--rn-zh-button-topbar-hover);
 }
 
 .rn-zh-search-topbar-icon {

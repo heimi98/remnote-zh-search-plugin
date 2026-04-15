@@ -72,12 +72,25 @@ const config = {
       const urlSearchParams = new URLSearchParams(window.location.search);
       const queryParams = Object.fromEntries(urlSearchParams.entries());
       const widgetName = queryParams["widgetName"];
-      if (widgetName == undefined) {document.body.innerHTML+="Widget ID not specified."}
+      if (widgetName == undefined) {
+        document.body.innerHTML += "Widget ID not specified.";
+      } else {
+      ${
+        isProd
+          ? `
+        const stylesheet = document.createElement('link');
+        stylesheet.rel = "stylesheet";
+        stylesheet.href = widgetName+"${SANDBOX_SUFFIX}.css";
+        document.head.appendChild(stylesheet);
+      `
+          : ''
+      }
 
-      const s = document.createElement('script');
-      s.type = "module";
-      s.src = widgetName+"${SANDBOX_SUFFIX}.js";
-      document.body.appendChild(s);
+        const s = document.createElement('script');
+        s.type = "module";
+        s.src = widgetName+"${SANDBOX_SUFFIX}.js";
+        document.body.appendChild(s);
+      }
       </script>
     `,
       filename: 'index.html',

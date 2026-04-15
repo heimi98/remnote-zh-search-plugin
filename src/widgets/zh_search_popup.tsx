@@ -3,7 +3,7 @@ import {
   RemViewer,
   renderWidget,
   usePlugin,
-  useTracker,
+  useTrackerPlugin,
   WidgetLocation,
 } from '@remnote/plugin-sdk';
 import { useEffect, useRef, useState } from 'react';
@@ -104,13 +104,14 @@ function SearchPopup() {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const previewViewportRef = useRef<HTMLDivElement>(null);
-  const popupContext = useTracker(
-    () => plugin.widget.getWidgetContext<WidgetLocation.Popup>(),
+  const popupContext = useTrackerPlugin(
+    (trackedPlugin) => trackedPlugin.widget.getWidgetContext<WidgetLocation.Popup>(),
     [plugin],
   );
   const buildState =
-    useTracker(
-      () => plugin.storage.getSession<SearchBuildState>(SEARCH_STATE_STORAGE_KEY),
+    useTrackerPlugin(
+      (trackedPlugin) =>
+        trackedPlugin.storage.getSession<SearchBuildState>(SEARCH_STATE_STORAGE_KEY),
       [plugin],
     ) ?? {
       version: 1,
@@ -120,15 +121,22 @@ function SearchPopup() {
       processedCount: 0,
       entryCount: 0,
     };
-  const index = useTracker(
-    () => readSearchIndex(plugin),
+  const index = useTrackerPlugin(
+    (trackedPlugin) => readSearchIndex(trackedPlugin),
     [plugin, buildState.lastBuiltAt, buildState.storageMode, buildState.entryCount],
   );
   const includeBackText =
-    useTracker(() => plugin.settings.getSetting<boolean>(INCLUDE_BACK_TEXT_SETTING_ID), [plugin]) ??
+    useTrackerPlugin(
+      (trackedPlugin) =>
+        trackedPlugin.settings.getSetting<boolean>(INCLUDE_BACK_TEXT_SETTING_ID),
+      [plugin],
+    ) ??
     true;
   const maxResults =
-    useTracker(() => plugin.settings.getSetting<number>(MAX_RESULTS_SETTING_ID), [plugin]) ??
+    useTrackerPlugin(
+      (trackedPlugin) => trackedPlugin.settings.getSetting<number>(MAX_RESULTS_SETTING_ID),
+      [plugin],
+    ) ??
     DEFAULT_MAX_RESULTS;
 
   const [query, setQuery] = useState('');

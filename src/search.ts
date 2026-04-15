@@ -1,4 +1,4 @@
-import { type RNPlugin, type Rem } from '@remnote/plugin-sdk';
+import { type PluginRem, type RNPlugin } from '@remnote/plugin-sdk';
 
 export const SEARCH_POPUP_WIDGET = 'zh_search_popup';
 export const SEARCH_TOP_BAR_WIDGET = 'zh_search_top_bar';
@@ -242,7 +242,9 @@ async function richTextToString(plugin: RNPlugin, richText?: unknown): Promise<R
 
   try {
     return {
-      text: normalizeWhitespace(await plugin.richText.toString(richText as Rem['text'])),
+      text: normalizeWhitespace(
+        await plugin.richText.toString(richText as NonNullable<PluginRem['text']>),
+      ),
       usedFallback: false,
     };
   } catch {
@@ -316,7 +318,7 @@ async function writeSearchIndex(
 
 async function snapshotRemBatch(
   plugin: RNPlugin,
-  rems: Rem[],
+  rems: PluginRem[],
 ): Promise<{ snapshots: BuildRemSnapshot[]; fallbackRichTextCount: number }> {
   const snapshots = await Promise.all(
     rems.map(async (rem) => {

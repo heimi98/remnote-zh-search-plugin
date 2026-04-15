@@ -21,7 +21,23 @@ import {
   markSearchIndexStale,
 } from '../search';
 
+const MOBILE_SIDEBAR_BUTTON_ID = 'open-zh-search-sidebar-button';
+
+async function isMobileOperatingSystem(plugin: ReactRNPlugin): Promise<boolean> {
+  try {
+    const operatingSystem = await plugin.app.getOperatingSystem();
+    return operatingSystem === 'ios' || operatingSystem === 'android';
+  } catch {
+    return (
+      (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 1) ||
+      (typeof screen !== 'undefined' && screen.width <= 768)
+    );
+  }
+}
+
 async function onActivate(plugin: ReactRNPlugin) {
+  const isMobile = await isMobileOperatingSystem(plugin);
+
   await plugin.settings.registerBooleanSetting({
     id: INCLUDE_BACK_TEXT_SETTING_ID,
     title: '检索背面内容',
@@ -65,12 +81,26 @@ async function onActivate(plugin: ReactRNPlugin) {
   });
 
   await plugin.app.registerWidget(SEARCH_POPUP_WIDGET, WidgetLocation.Popup, {
-    dimensions: { height: 'auto', width: 1120 },
+    dimensions: { height: 'auto', width: isMobile ? '100%' : 1120 },
   });
 
-  await plugin.app.registerWidget(SEARCH_TOP_BAR_WIDGET, WidgetLocation.TopBar, {
-    dimensions: { height: 'auto', width: 'auto' },
-  });
+  if (isMobile) {
+    await plugin.app.registerWidget(SEARCH_TOP_BAR_WIDGET, WidgetLocation.TopBar, {
+      dimensions: { height: 'auto', width: 'auto' },
+    });
+
+    await plugin.app.registerWidget(SEARCH_TOP_BAR_WIDGET, WidgetLocation.PaneHeader, {
+      dimensions: { height: 'auto', width: 'auto' },
+    });
+
+    await plugin.app.registerSidebarButton({
+      id: MOBILE_SIDEBAR_BUTTON_ID,
+      name: '中文搜索',
+      action: async () => {
+        await openSearchPopup(plugin);
+      },
+    });
+  }
 
   plugin.event.addListener(AppEvents.GlobalRemChanged, REM_CHANGE_LISTENER_KEY, () => {
     void markSearchIndexStale(plugin);
