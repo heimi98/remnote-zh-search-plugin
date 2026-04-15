@@ -22,6 +22,7 @@ import {
 } from '../search';
 
 const MOBILE_SIDEBAR_BUTTON_ID = 'open-zh-search-sidebar-button';
+const MOBILE_POPUP_HEIGHT = 760;
 
 async function isMobileOperatingSystem(plugin: ReactRNPlugin): Promise<boolean> {
   try {
@@ -81,7 +82,7 @@ async function onActivate(plugin: ReactRNPlugin) {
   });
 
   await plugin.app.registerWidget(SEARCH_POPUP_WIDGET, WidgetLocation.Popup, {
-    dimensions: { height: 'auto', width: isMobile ? '100%' : 1120 },
+    dimensions: { height: isMobile ? MOBILE_POPUP_HEIGHT : 'auto', width: isMobile ? '100%' : 1120 },
   });
 
   if (isMobile) {

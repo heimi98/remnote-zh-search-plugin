@@ -104,6 +104,7 @@ function SearchPopup() {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const previewViewportRef = useRef<HTMLDivElement>(null);
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
   const popupContext = useTrackerPlugin(
     (trackedPlugin) => trackedPlugin.widget.getWidgetContext<WidgetLocation.Popup>(),
     [plugin],
@@ -146,6 +147,32 @@ function SearchPopup() {
 
   useEffect(() => {
     void ensureSearchIndex(plugin, 'popup');
+  }, [plugin]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function detectMobileLayout() {
+      try {
+        const operatingSystem = await plugin.app.getOperatingSystem();
+        if (!cancelled) {
+          setIsMobileLayout(operatingSystem === 'ios' || operatingSystem === 'android');
+        }
+      } catch {
+        if (!cancelled) {
+          setIsMobileLayout(
+            (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 1) ||
+              (typeof screen !== 'undefined' && screen.width <= 768),
+          );
+        }
+      }
+    }
+
+    void detectMobileLayout();
+
+    return () => {
+      cancelled = true;
+    };
   }, [plugin]);
 
   useEffect(() => {
@@ -254,7 +281,7 @@ function SearchPopup() {
   }
 
   function renderResultCard(result: SearchResult, indexInList: number) {
-    const active = selectedResult?.entry.remId === result.entry.remId;
+    const active = !isMobileLayout && selectedResult?.entry.remId === result.entry.remId;
 
     return (
       <button
@@ -264,8 +291,12 @@ function SearchPopup() {
         }}
         className={`rn-zh-search-result-card${active ? ' is-active' : ''}`}
         disabled={openingRemId === result.entry.remId}
-        onClick={() => setSelectedRemId(result.entry.remId)}
-        onDoubleClick={() => void openResult(result.entry.remId)}
+        onClick={() =>
+          isMobileLayout ? void openResult(result.entry.remId) : setSelectedRemId(result.entry.remId)
+        }
+        onDoubleClick={
+          isMobileLayout ? undefined : () => void openResult(result.entry.remId)
+        }
         type="button"
       >
         {indexInList === 0 ? <div className="rn-zh-search-best-match">最佳匹配</div> : null}
@@ -306,7 +337,7 @@ function SearchPopup() {
 
 
   return (
-    <div className="rn-zh-search-shell rn-zh-search-theme">
+    <div className={`rn-zh-search-shell rn-zh-search-theme${isMobileLayout ? ' is-mobile' : ''}`}>
       <section className="rn-zh-search-results-panel">
         <div className="rn-zh-search-header">
           <div className="rn-zh-search-toolbar">
@@ -367,7 +398,9 @@ function SearchPopup() {
             <div className="rn-zh-search-empty-state">
               <p className="rn-zh-search-empty-title">输入中文关键词开始搜索</p>
               <p className="rn-zh-search-empty-copy">
-                左侧展示匹配项，右侧展示当前选中项的完整预览。
+                {isMobileLayout
+                  ? '匹配结果会显示在下方列表中，点击任意结果即可直接打开。'
+                  : '左侧展示匹配项，右侧展示当前选中项的完整预览。'}
               </p>
             </div>
           ) : buildState.isBuilding && !index?.entryCount ? (
@@ -395,34 +428,36 @@ function SearchPopup() {
         </div>
       </section>
 
-      <aside className="rn-zh-search-preview-panel">
-        {selectedResult ? (
-          <div className="rn-zh-search-preview-surface">
-            <RemViewer
-              remId={selectedResult.entry.remId}
-              width="100%"
-            />
-            <div className="rn-zh-search-preview-viewport" ref={previewViewportRef}>
-              <RemHierarchyEditorTree
-                {...({
-                  constraintRef: previewViewportRef,
-                  remId: selectedResult.entry.remId,
-                  width: '100%',
-                  maxWidth: '100%',
-                } as any)}
-                key={selectedResult.entry.remId}
+      {!isMobileLayout ? (
+        <aside className="rn-zh-search-preview-panel">
+          {selectedResult ? (
+            <div className="rn-zh-search-preview-surface">
+              <RemViewer
+                remId={selectedResult.entry.remId}
+                width="100%"
               />
+              <div className="rn-zh-search-preview-viewport" ref={previewViewportRef}>
+                <RemHierarchyEditorTree
+                  {...({
+                    constraintRef: previewViewportRef,
+                    remId: selectedResult.entry.remId,
+                    width: '100%',
+                    maxWidth: '100%',
+                  } as any)}
+                  key={selectedResult.entry.remId}
+                />
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="rn-zh-search-empty-state rn-zh-search-empty-state-preview">
-            <p className="rn-zh-search-empty-title">没有可预览的结果</p>
-            <p className="rn-zh-search-empty-copy">
-              当左侧出现匹配项后，右侧会展示当前选中笔记的预览内容。
-            </p>
-          </div>
-        )}
-      </aside>
+          ) : (
+            <div className="rn-zh-search-empty-state rn-zh-search-empty-state-preview">
+              <p className="rn-zh-search-empty-title">没有可预览的结果</p>
+              <p className="rn-zh-search-empty-copy">
+                当左侧出现匹配项后，右侧会展示当前选中笔记的预览内容。
+              </p>
+            </div>
+          )}
+        </aside>
+      ) : null}
     </div>
   );
 }
